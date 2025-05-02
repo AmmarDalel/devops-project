@@ -5,6 +5,7 @@ import path from "path";
 import { connectDB } from "./config/db.js";
 
 import productRoutes from "./routes/product.route.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -13,7 +14,11 @@ const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
 
-app.use(express.json()); // allows us to accept JSON data in the req.body
+app.use(express.json()); 
+app.use(cors({
+	origin: 'http://localhost:5173'
+  }));
+  
 
 app.use("/api/products", productRoutes);
 
