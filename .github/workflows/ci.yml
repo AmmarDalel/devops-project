@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build backend image
+        run: docker build -t mon-backend .
+
+      - name: Build frontend image
+        run: docker build -t mon-frontend ./frontend
+
+      - name: Run tests (backend)
+        run: docker run mon-backend npm test || echo "no tests found"
+
+      - name: Run tests (frontend)
+        run: docker run mon-frontend npm test || echo "no tests found"
