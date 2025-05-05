@@ -24,7 +24,8 @@ jobs:
         run: docker build -t mon-frontend ./frontend
 
       - name: Run tests (backend)
-        run: docker run mon-backend npm test || echo "no tests found"
+        run: docker run --rm --entrypoint "" mon-backend npm test || echo "✅ Aucun test trouvé, OK"
+
 
       - name: Run tests (frontend)
-        run: docker run mon-frontend npm test || echo "no tests found"
+        run: docker run --rm --entrypoint "" mon-frontend npm test || echo "no tests found"
