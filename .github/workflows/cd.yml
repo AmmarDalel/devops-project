@@ -16,7 +16,7 @@ jobs:
       # Déployer le frontend (React)
       - name: Build Docker image for frontend
         run: |
-          docker build  -t mon-frontend ./frontend .
+          docker build  -t mon-frontend ./frontend
       
       - name: Deploy frontend container
         run: |
